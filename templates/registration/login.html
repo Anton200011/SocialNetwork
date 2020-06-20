@@ -1,0 +1,35 @@
+<!-- templates/registration/login.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/signUp.css"/>
+
+</head>
+<body>
+<div class="jumbotron">
+    <h3>Вход</h3>
+    <hr class="my-4">
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.username.id_for_label }}">Логин:</label>
+        <div class="myForm">
+            {{ form.username }}
+        </div>
+        <label for="{{ form.password.id_for_label }}">Пароль:</label>
+        <div class="myForm">
+            {{ form.password }}
+        </div>
+        <hr class="my-4">
+        <div style="display:flex;">
+            <p style="font-size: 20px"><a href="/">Назад</a></p>
+            <button class="btn btn-success btn-lg" type="submit" style="margin-bottom: 15px; margin-left: 35%">Войти</button>
+        </div>
+    </form>
+</div>
+</body>

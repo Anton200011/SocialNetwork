@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Профиль{% endblock title %}
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/signUp.css"/>
+
+{% block content2 %}
+    <div id="jumbo2" class="jumbotron">
+        <div class="prof_icon" style="margin-right: 150px;">
+            <img src="http://127.0.0.1:8000/static/img/Profile_Icon1.png" style="width: 250px;" alt="profile_icon"/>
+        </div>
+        <form method="post" style="font-size: 22px">
+            {% csrf_token %}
+            <label for="{{ form.first_name.id_for_label }}">Имя:</label>
+            <div style="height: 50px; display: flex">
+                {{ form.first_name }}
+            </div>
+            <label for="{{ form.last_name.id_for_label }}">Фамилия:</label>
+            <div style="height: 50px; display: flex">
+                {{ form.last_name }}
+            </div>
+            <label for="{{ form.telephone_numb.id_for_label }}">Номер телефона:</label>
+            <div style="height: 50px; display: flex">
+                {{ form.telephone_numb }}
+            </div>
+            <label for="{{ form.username.id_for_label }}">Ваш логин:</label>
+            <div style="height: 50px; display: flex">
+                {{ form.username }}
+            </div>
+            <label for="{{ form.email.id_for_label }}">Ваш Email:</label>
+            <div style="height: 50px; display: flex">
+                {{ form.email }}
+            </div>
+            <hr class="my-4">
+            <div style="display:flex; align-content: center">
+                <h3><a href="{% url 'users:user_profile' user.id %}" style="margin: 0 auto">Назад</a></h3>
+                <button class="btn btn-success btn-lg" type="submit" style="margin: 0 auto;">Применить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

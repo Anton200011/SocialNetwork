@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Диалоги{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/Dialogs.css"/>
+{% endblock %}
+{% block content2 %}
+    <div id="MyJ" class="jumbotron">
+        <div class="userMess">
+            {% if dialogs.count == 0 %}
+                <div><p>Пустота...</p></div>
+            {% else %}
+                {% for dialog in dialogs %}
+                    <div class="jumbotron"
+                         style="display:flex; flex-direction:row; justify-content: space-between; font-size: 25px; background: white; margin: 0; margin-bottom: 25px; border-radius: 20px">
+                        <a href="{% url 'message:message_list' dialog.participant1.id dialog.participant2.id %}">
+                            <div class="prof_icon" style="margin-right: 150px;">
+                                <img src="http://127.0.0.1:8000/static/img/Message_Icon1.png" style="width: 100px;"
+                                     alt="profile_icon"/>
+                            </div>
+                        </a>
+                        {% if user.id == dialog.participant1.id and user.id == dialog.participant2.id %}
+                            <a href={% url 'users:user_profile' user.id %}>{{ user.first_name }}</a>
+                            <div class="other">
+                                <a class="fa fa-times" href="{% url 'message:dialog_delete' user.id user.id %}"></a>
+                            </div>
+                        {% elif  user.id == dialog.participant1.id %}
+                            <a href={% url 'users:user_profile' dialog.participant2.id %}>{{ dialog.participant2.first_name }}</a>
+                            <div class="other">
+                                <a class="fa fa-times" href="{% url 'message:dialog_delete' user.id dialog.participant2.id %}"></a>
+                            </div>
+                        {% else %}
+                            <a href={% url 'users:user_profile' dialog.participant1.id %}>{{ dialog.participant1.first_name }}</a>
+                            <div class="other">
+                                <a class="fa fa-times" href="{% url 'message:dialog_delete' user.id dialog.participant1.id %}"></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

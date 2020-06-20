@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Удалить профиль{% endblock title %}
+
+{% block content2 %}
+    <div class="jumbotron">
+        <h3>Вы действительно хотите удалить профиль?</h3>
+        <hr class="my-4">
+        <div style="display:flex;">
+        <a href="{% url 'users:user_profile' user.id %}">
+            <button class="btn btn-primary" style="font-size: 30px; width: 130px">
+                Назад
+            </button>
+        </a>
+        <form action="{% url 'users:user_delete' user.id %}" method="post">
+            {% csrf_token %}
+            <div style="font-size: 25px">
+                <button class="btn btn-danger" type="submit"
+                        style="font-size: 30px; margin-left: 100%; width: 130px">
+                    <span class="fa fa-trash-o" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock %}

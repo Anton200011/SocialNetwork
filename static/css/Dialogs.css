@@ -1,0 +1,41 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+.jumbotron {
+    margin: 0;
+    font-size: 15px;
+}
+
+#MyJ{
+    /*margin: auto 15% auto 15%;*/
+}
+
+.other{
+    margin-left: auto;
+    margin-top: -2%;
+}
+
+/*.jumbotron > a:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    background: rgba(0, 0, 0, .5);*/
+/*    opacity: 0;*/
+/*}*/
+
+/*.jumbotron > a:before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    opacity: 0;*/
+/*}*/
+
+/*.jumbotron > a:hover:before,*/
+/*.jumbotron > a:hover:after {*/
+/*    opacity: 1;*/
+/*}*/

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Сообщения{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/userMessage.css"/>
+{% endblock %}
+{% block content2 %}
+    <div id="scroll" class="userMess">
+        {% if messages.count == 0 %}
+            <div style="margin: auto; margin-left: 45%; margin-top: 40%"><h3>Пусто...</h3></div>
+        {% endif %}
+        {% for message in messages %}
+            {% if user.id == message.sender.id %}
+                <div class="userRight">
+                    <div style="margin-left: 90%; margin-bottom: -25px">
+                        {% if user.id == dialog.participant1.id and user.id == dialog.participant2.id %}
+                            <a href={% url 'message:message_delete' message.id user.id user.id %}><span
+                                    class="fa fa-times"></span></a>
+                        {% elif user.id == dialog.participant1.id %}
+                            <a href={% url 'message:message_delete' message.id user.id dialog.participant2.id %}><span
+                                    class="fa fa-times"></span></a>
+                        {% else %}
+                            <a href={% url 'message:message_delete' message.id dialog.participant1.id user.id %}><span
+                                    class="fa fa-times"></span></a>
+                        {% endif %}
+                    </div>
+                    <p>{{ message.text.message_text }}</p>
+                </div>
+            {% else %}
+                <div class="userLeft">
+                    <p>{{ message.text.message_text }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if user.id == dialog.participant1.id and user.id == dialog.participant2.id %}
+        <form action="{% url 'message:send_message' user.id user.id %}" method="post">
+            {% csrf_token %}
+            <div style="display: flex; height: 60px; font-size: 25px;">
+                {{ form }}
+                <button class="btn btn-primary" type="submit"
+                        style="font-size: 30px; text-align: center; border-radius: 0% 10% 10% 0%; width: 8%">
+                    <span class="fa fa-paper-plane" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+    {% elif user.id == dialog.participant1.id %}
+        {#        <div class="myBottomClass">#}
+        <form action="{% url 'message:send_message' user.id dialog.participant2.id %}" method="post">
+            {% csrf_token %}
+            <div style="display: flex; height: 60px; font-size: 25px">
+                {{ form }}
+                <button class="btn btn-primary" type="submit"
+                        style="font-size: 30px; text-align: center; border-radius: 0% 10% 10% 0%; width: 8%">
+                    <span class="fa fa-paper-plane" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+        {#        </div>#}
+    {% else %}
+        <div class="myBottomClass">
+            <form action="{% url 'message:send_message' user.id dialog.participant1.id %}" method="post">
+                {% csrf_token %}
+                <div style="display: flex; height: 60px; font-size: 25px">
+                    {{ form }}
+                    <button class="btn btn-primary" type="submit"
+                            style="font-size: 30px; text-align: center; border-radius: 0% 10% 10% 0%; width: 8%">
+                        <span class="fa fa-paper-plane" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('scroll').scrollTop = 9999;
+        }
+    </script>
+{% endblock %}

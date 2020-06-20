@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}title{% endblock %}</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/sideBar.css"/>
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/homeStyle.css"/>
+    {% block link %} {% endblock %}
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+{% if user.is_authenticated %}
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="font-size: 20px; padding-left: 8px">
+        <a class="navbar-brand" href="{% url 'users:user_profile' user.id %}">Добро пожаловать, {{ user.first_name }}</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={% url 'users:user_profile' user.id %}>Моя страница</a>
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link nav-link-collapse"
+                            href="#"
+                            id="hasSubItems"
+                            data-toggle="collapse"
+                            data-target="#collapseSubItems2"
+                            aria-controls="collapseSubItems2"
+                            aria-expanded="false">
+                        Люди
+                    </a>
+                    <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:user_list' %}">
+                                <span class="nav-link-text">Поиск</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'friendlist:friend_list' user.id %}">
+                                <span class="nav-link-text">Список друзей</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'message:dialogs' user.id %}">Сообщения</a>
+                </li>
+                <li>
+                    <a class="nav-link fixed-bottom" href="{% url 'logout' %}">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="content-wrapper">
+        <div class="container-fluid">
+            {% csrf_token %}
+            {% block content2 %} {% endblock %}
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>all rights reserved</p>
+            </div>
+        </div>
+    </footer>
+{% else %}
+    <div id="MyJ2" class="jumbotron">
+        <h1>Социальная сеть Django</h1>
+        <hr class="my-4">
+        <div class="container">
+            <p>Добро пожаловать в мою социальную сеть!</p>
+            <p>Данный сайт разработан с использованием фреймворка Django</p>
+            <p>Пожалуйста, зарегистрируйтесь или войдите в учетную Вашу запись.</p>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Войти</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'users:signup' %}"
+                   role="button">Зарегистрироваться</a>
+            </p>
+        </div>
+    </div>
+    <footer class="footer2">
+        <div class="container">
+            <div class="text-center">
+                <p>all rights reserved</p>
+            </div>
+        </div>
+    </footer>
+{% endif %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/static/js/sideBar.js"></script>
+</body>
+</html>

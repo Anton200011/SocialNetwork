@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Друзья{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/friendList.css"/>
+{% endblock %}
+{% block content2 %}
+    <div class="jumbotron">
+        <h1>Друзья</h1>
+        <hr class="my-4">
+        {% if friends.count == 0 %}
+            <div><h3>Пустота...</h3></div>
+        {% else %}
+            {% for friend in friends %}
+                <div class="friendLi">
+                    <div class="prof_icon" style="margin-right: 150px;">
+                        <img src="http://127.0.0.1:8000/static/img/Profile_Icon1.png" style="width: 80px;"
+                             alt="profile_icon"/>
+                    </div>
+                    <div style="width: 20%">
+                        <a href="{% url 'users:user_profile' friend.friend_id.id %}">{{ friend.friend_id.first_name }} {{ friend.friend_id.last_name }}</a>
+                    </div>
+                     <div style="margin-left: 20%; width: 35%">
+                        {% if  friend.friend_id.last_login != None %}
+                            <a>{{ friend.friend_id.last_login }}</a>
+                        {% else %}
+                            <a> - </a>
+                        {% endif %}
+                    </div>
+                    <div class="actions">
+                        <form action="{% url 'friendlist:delete_friend' friend.friend_id.id user.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit" style="font-size: 20px"><span
+                                    class="fa fa-times"></span></button>
+                        </form>
+                        <form action="{% url 'message:message_list' user.id friend.friend_id.id %}" method="get">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit" style="font-size: 20px"><span
+                                    class="fa fa-pencil-square"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <hr class="my-4">
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

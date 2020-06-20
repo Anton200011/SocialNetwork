@@ -1,0 +1,69 @@
+.jumbotron {
+    margin: -3% 0% 0%;
+    font-size: 15px;
+}
+
+.userMess {
+    /*display: flex;*/
+    overflow: scroll;
+    font-size: 22px;
+    margin-bottom: 2%;
+    margin-top: -1%;
+    /*margin-left: 10%;*/
+    background: #ffffff;
+    border: 1px double #858484;
+    /*border-radius: 9px;*/
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 100%;
+    height: 550px;
+
+}
+
+.myBottomClass {
+    /*display: flex;*/
+    /*overflow: scroll;*/
+    /*font-size: 20px;*/
+    /*margin: 0 0 1%;*/
+    /*background: black;*/
+    border: 1px double #858484;
+    /*border-radius: 9px;*/
+    /*padding-bottom: 1%;*/
+    width: 100%;
+}
+
+.userRight {
+    margin: 1% 2% 3% auto;
+    width: 400px;
+    background: #d2d2d2;
+    border-radius: 15px;
+    justify-content: center;
+    text-align: center;
+    padding: 14px 14px 2px;
+    /*padding-top: 10px;*/
+    /*padding-right: 10px;*/
+    /*padding-left: 10px;*/
+    word-wrap: break-word;
+}
+
+.btn {
+    border-radius: 10% 30% 50% 70%;
+}
+
+.userLeft {
+    margin: 1% auto 2% 3%;
+    width: 300px;
+    background: #929292;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+}
+
+.form-number {
+    width: 20px;
+}
